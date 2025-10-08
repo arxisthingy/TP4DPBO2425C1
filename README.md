@@ -40,6 +40,8 @@ lalu menekan tombol "Delete", dan muncul window konfirmasi, apabila user menekan
 Tabel akan memperbarui isinya apabila ada produk yang berhasil di insert, update, dan delete.  
 
 ## Dokumentasi
-###
+
+https://github.com/user-attachments/assets/b3575325-6c5b-4e86-a813-8b63c787129b
+
 
 
