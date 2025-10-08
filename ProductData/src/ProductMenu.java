@@ -155,7 +155,7 @@ public class ProductMenu extends JFrame {
                     p.getId(),
                     p.getGun(),
                     p.getSkinName(),
-                    String.format("%.2f", p.getSkinPrice()),
+                    p.getSkinPrice(),
                     p.getSkinWear()
             };
             tmp.addRow(row);
