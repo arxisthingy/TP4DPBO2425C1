@@ -1,0 +1,9 @@
+.vscode/
+*.exe
+*/__pycache__/
+*.py[cod]
+*$py.class
+*.class
+*/.idea
+*/out
+*.iml
