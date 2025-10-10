@@ -5,6 +5,7 @@ public class Product {
     private double skinPrice;
     private String skinWear;   // contoh: Factory New, Minimal Wear, dll.
 
+    // CONSTRUCTOR
     public Product(String id, String gun, String skinName, double skinPrice, String skinWear) {
         this.id = id;
         this.gun = gun;

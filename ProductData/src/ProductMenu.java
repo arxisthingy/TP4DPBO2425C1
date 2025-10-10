@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
+// ProductMenu class
 public class ProductMenu extends JFrame {
     public static void main(String[] args) {
         ProductMenu menu = new ProductMenu();
@@ -15,9 +16,11 @@ public class ProductMenu extends JFrame {
         menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    // Atribut  
     private int selectedIndex = -1;
     private ArrayList<Product> listProduct;
 
+    // Komponen GUI
     private JPanel mainPanel;
     private JTextField idField;
     private JTextField skinNameField;
@@ -35,10 +38,12 @@ public class ProductMenu extends JFrame {
     private JSlider floatSlider;
     private JLabel floatValueLabel;
 
+    // Konstruktor
     public ProductMenu() {
         listProduct = new ArrayList<>();
         populateList();
 
+        // set properti slider  
         floatSlider.setMinimum(0);
         floatSlider.setMaximum(100);
         floatSlider.setValue(0);
@@ -81,8 +86,10 @@ public class ProductMenu extends JFrame {
                 "Flip Knife", "Gut Knife", "Talon Knife", "Huntsman Knife", "Bowie Knife",
                 "Falchion Knife", "Ursus Knife", "Nomad Knife", "Paracord Knife", "Skeleton Knife",
         };
+        // Set model untuk combo box
         gunComboBox.setModel(new DefaultComboBoxModel<>(kategoriData));
 
+        // Awal state form
         deleteButton.setVisible(false);
 
         // Tombol add/update
@@ -129,6 +136,7 @@ public class ProductMenu extends JFrame {
         });
     }
 
+    // Method untuk mendapatkan wear dari float value
     private String getWearFromFloat(double f) {
         if (f >= 0.00 && f < 0.07) return "Factory New (FN)";
         else if (f >= 0.07 && f < 0.15) return "Minimal Wear (MW)";
@@ -137,6 +145,7 @@ public class ProductMenu extends JFrame {
         else return "Battle-Scarred (BS)";
     }
 
+    // Method untuk mengatur posisi slider berdasarkan wear
     private void setSliderFromWear(String wear) {
         if (wear.startsWith("Factory")) floatSlider.setValue(3);
         else if (wear.startsWith("Minimal")) floatSlider.setValue(10);
@@ -145,10 +154,12 @@ public class ProductMenu extends JFrame {
         else floatSlider.setValue(70);
     }
 
+    // Method untuk mengisi tabel
     public final DefaultTableModel setTable() {
         Object[] cols = {"ID", "Gun", "Skin Name", "Price", "Wear"};
         DefaultTableModel tmp = new DefaultTableModel(null, cols);
 
+        //  isi data
         for (int i = 0; i < listProduct.size(); i++) {
             Product p = listProduct.get(i);
             Object[] row = {
@@ -163,6 +174,7 @@ public class ProductMenu extends JFrame {
         return tmp;
     }
 
+    // Method untuk insert data
     public void insertData() {
         try {
             String id = idField.getText();
@@ -171,7 +183,7 @@ public class ProductMenu extends JFrame {
             double price = Double.parseDouble(hargaField.getText());
             double floatValue = floatSlider.getValue() / 100.0;
             String wear = getWearFromFloat(floatValue);
-
+            // tambahkan ke list
             listProduct.add(new Product(id, gun, skin, price, wear));
             productTable.setModel(setTable());
             clearForm();
@@ -181,6 +193,7 @@ public class ProductMenu extends JFrame {
         }
     }
 
+    // Method untuk update data
     public void updateData() {
         try {
             String id = idField.getText();
@@ -190,6 +203,7 @@ public class ProductMenu extends JFrame {
             double floatValue = floatSlider.getValue() / 100.0;
             String wear = getWearFromFloat(floatValue);
 
+            // update data di list
             Product p = listProduct.get(selectedIndex);
             p.setId(id);
             p.setGun(gun);
@@ -197,6 +211,7 @@ public class ProductMenu extends JFrame {
             p.setSkinPrice(price);
             p.setSkinWear(wear);
 
+            // refresh table
             productTable.setModel(setTable());
             clearForm();
             JOptionPane.showMessageDialog(null, "Data berhasil diubah");
@@ -205,6 +220,7 @@ public class ProductMenu extends JFrame {
         }
     }
 
+    // Method untuk delete data
     public void deleteData() {
         listProduct.remove(selectedIndex);
         productTable.setModel(setTable());
@@ -212,6 +228,7 @@ public class ProductMenu extends JFrame {
         JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
     }
 
+    // Method untuk mengosongkan form
     public void clearForm() {
         idField.setText("");
         skinNameField.setText("");
